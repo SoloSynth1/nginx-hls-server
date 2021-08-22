@@ -30,7 +30,7 @@ MacOS:
 brew install ffmpeg
 ```
 
-# NGINX
+### NGINX
 
 As we need to use the RTMP Module in NGINX, which might not be present in certain build, we will clone the git repo and compile `nginx`:
 ```sh
