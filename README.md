@@ -87,7 +87,7 @@ You can run it with `&` or other tools (e.g. `screen` or `nohup`) to make it run
 ### 2. Set up NGINX 
 
 Modify `/usr/local/nginx/conf/nginx.conf` so that it serves contents in `/tmp/hls` as HLS stream:
-```
+```nginx
 worker_processes  1;
 user	pi;
 
@@ -130,7 +130,7 @@ Open VLC player and connect to `http://<ip-address>/live/stream.m3u8`.
 ## Optional
 
 Add RTMP functionality to the server so that it can accept RTMP streams and process into HLS stream.
-```
+```nginx
 rtmp { 
     server { 
         listen 1935; 
