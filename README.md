@@ -2,7 +2,7 @@
 
 ## Objective
 
-To create a web server to serve HLS stream via NGINX.
+To create a video stream and serve as a HLS endpoint via NGINX.
 
 ## Prerequisites
 
