@@ -25,24 +25,11 @@ The steps listed here should work for most *nix devices, as long as `ffmpeg` & `
 
 ## ffmpeg
 
-Debian-based:
 ```sh
-sudo apt-get install ffmpeg
-```
-
-Arch-based:
-```sh
-sudo pacman -S ffmpeg
-```
-
-RHEL:
-```sh
-yum install ffmpeg
-```
-
-MacOS:
-```sh
-brew install ffmpeg
+sudo apt-get install ffmpeg     # Debain-based
+sudo pacman -S ffmpeg           # Arch-based
+yum install ffmpeg              # RHEL/Fedora
+brew install ffmpeg             # macos
 ```
 
 ## NGINX
