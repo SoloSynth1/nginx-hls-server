@@ -1,6 +1,6 @@
 # nginx-hls-server
 
-## Table of Contents
+# Table of Contents
 
 <!--ts-->
    * [Objective](#objective)
@@ -15,15 +15,15 @@
         * [ffmpeg cannot access video input device](#ffmpeg-cannot-access-video-input-device)
 <!--te-->
 
-## Objective
+# Objective
 
 To create a video stream and serve as a HLS endpoint via NGINX.
 
-## Prerequisites
+# Prerequisites
 
 The steps listed here should work for most *nix devices, as long as `ffmpeg` & `nginx` are supported & installed.
 
-### ffmpeg
+## ffmpeg
 
 Debian-based:
 ```sh
@@ -45,7 +45,7 @@ MacOS:
 brew install ffmpeg
 ```
 
-### NGINX
+## NGINX
 
 As we need to use the RTMP Module in NGINX, which might not be present in certain build, we will clone the git repo and compile `nginx`:
 ```sh
@@ -60,18 +60,18 @@ sudo make install
 
 This will install NGINX in `/usr/local/nginx`.
 
-## Setup
+# Setup
 
-### 1. Create ffmepg HLS stream
+## 1. Create ffmepg HLS stream
 
 Here is an example to set up a HLS stream at `/tmp/hls/` with following settings:
 
-#### Input
+### Input
 - Input device: `/dev/video0`
 - Resoltuion: `1280x720`
 - Framerate: `30`
 
-#### HLS stream
+### HLS stream
 - Encoding preset: `superfast`
 - Target (average) bit rate: `5000k`
 - Codec: `h264`
@@ -99,7 +99,7 @@ ffmpeg -video_size 1280x720 \
 
 You can run it with `&` or other tools (e.g. `screen` or `nohup`) to make it run in background.
 
-### 2. Set up NGINX 
+## 2. Set up NGINX 
 
 Modify `/usr/local/nginx/conf/nginx.conf` so that it serves contents in `/tmp/hls` as HLS stream:
 ```nginx
@@ -138,11 +138,11 @@ Start the nginx server:
 /usr/local/nginx/sbin/nginx
 ```
 
-## Test
+# Test
 
 Open VLC player and connect to `http://<ip-address>/live/stream.m3u8`.
 
-## Optional
+# Optional
 
 Add RTMP functionality to the server so that it can accept RTMP streams and process into HLS stream.
 ```nginx
@@ -161,9 +161,9 @@ rtmp {
 } 
 ```
 
-## Troubleshooting
+# Troubleshooting
 
-### Cannot find correct input device
+## Cannot find correct input device
 
 If you have difficulties in finding the right device/config/parameters, you can view the details device info by using `v4l2-ctl`.
 
@@ -183,7 +183,7 @@ or
 v4l2-ctl --list-devices
 ```
 
-### ffmpeg cannot access video input device
+## ffmpeg cannot access video input device
 
 ```sh
 [video4linux2,v4l2 @ 0x5567bd2739c0] Cannot open video device /dev/video0: Operation not permitted
