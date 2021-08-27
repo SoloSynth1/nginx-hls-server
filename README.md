@@ -1,5 +1,20 @@
 # nginx-hls-server
 
+## Table of Contents
+
+<!--ts-->
+   * [Objective](#objective)
+   * [Prerequisites](#prerequisites)
+   * [Setup](#setup)
+        * [Create ffmepg HLS stream](#1-create-ffmepg-hls-stream)
+        * [Set up NGINX](#2-set-up-nginx)
+   * [Test](#test)
+   * [Optional](#optional)
+   * [Troubleshooting](#troubleshooting)
+        * [Cannot find correct input device](#cannot-find-correct-input-device)
+        * [ffmpeg cannot access video input device](#ffmpeg-cannot-access-video-input-device)
+<!--te-->
+
 ## Objective
 
 To create a video stream and serve as a HLS endpoint via NGINX.
@@ -84,26 +99,6 @@ ffmpeg -video_size 1280x720 \
 
 You can run it with `&` or other tools (e.g. `screen` or `nohup`) to make it run in background.
 
-### (Optional) Find out more on your video input device
-
-If you have difficulties in finding the right device/config/parameters, you can view the details device info by using `v4l2-ctl`.
-
-To use `v4l2-ctl`, you need to have `v4l-utils` installed. Please install it using package manager of your distro.
-
-For example:
-```sh
-sudo apt install v4l-utils
-```
-
-Then you can list all of the device details using the following command:
-```sh
-v4l2-ctl --all
-```
-or 
-```sh
-v4l2-ctl --list-devices
-```
-
 ### 2. Set up NGINX 
 
 Modify `/usr/local/nginx/conf/nginx.conf` so that it serves contents in `/tmp/hls` as HLS stream:
@@ -164,4 +159,40 @@ rtmp {
         } 
     } 
 } 
+```
+
+## Troubleshooting
+
+### Cannot find correct input device
+
+If you have difficulties in finding the right device/config/parameters, you can view the details device info by using `v4l2-ctl`.
+
+To use `v4l2-ctl`, you need to have `v4l-utils` installed. Please install it using package manager of your distro.
+
+For example:
+```sh
+sudo apt install v4l-utils
+```
+
+Then you can list all of the device details using the following command:
+```sh
+v4l2-ctl --all
+```
+or 
+```sh
+v4l2-ctl --list-devices
+```
+
+### ffmpeg cannot access video input device
+
+```sh
+[video4linux2,v4l2 @ 0x5567bd2739c0] Cannot open video device /dev/video0: Operation not permitted
+/dev/video0: Operation not permitted
+```
+
+In some distros, there are restrictions on which devices certain softwares can access to. Thus in order to let `ffmpeg` to access to the camera e.g. `/dev/video0`, you will need to explicitly grant permission to `ffmpeg`
+
+Here is an example on Ubuntu:
+```sh
+snap connect ffmpeg:camera
 ```
