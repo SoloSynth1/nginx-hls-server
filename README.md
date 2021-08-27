@@ -84,6 +84,26 @@ ffmpeg -video_size 1280x720 \
 
 You can run it with `&` or other tools (e.g. `screen` or `nohup`) to make it run in background.
 
+### (Optional) Find out more on your video input device
+
+If you have difficulties in finding the right device/config/parameters, you can view the details device info by using `v4l2-ctl`.
+
+To use `v4l2-ctl`, you need to have `v4l-utils` installed. Please install it using package manager of your distro.
+
+For example:
+```sh
+sudo apt install v4l-utils
+```
+
+Then you can list all of the device details using the following command:
+```sh
+v4l2-ctl --all
+```
+or 
+```sh
+v4l2-ctl --list-devices
+```
+
 ### 2. Set up NGINX 
 
 Modify `/usr/local/nginx/conf/nginx.conf` so that it serves contents in `/tmp/hls` as HLS stream:
