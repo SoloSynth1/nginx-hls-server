@@ -125,6 +125,8 @@ Start the nginx server:
 /usr/local/nginx/sbin/nginx
 ```
 
+Note: You may need to run with root access. i.e. run it with `sudo`.
+
 # Test
 
 Open VLC player and connect to `http://<ip-address>/live/stream.m3u8`.
